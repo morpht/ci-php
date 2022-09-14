@@ -1,0 +1,54 @@
+name: build_and_publish
+on:
+  push:
+    branches-ignore:
+      # prevent building on commits to any branch
+      - '**'
+    tags:
+      # Build on every tag:
+      - '**'
+  pull_request:
+
+jobs:
+  login-build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to the GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        if: contains(github.ref, 'refs/tags/')
+        name: Build and push release image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/ci-php:latest
+            ghcr.io/${{ github.repository_owner }}/ci-php:${{ github.ref_name }}
+      -
+        if: contains(github.ref, 'refs/pull/')
+        name: Build and push pull request image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/ci-php:review-pr-${{ github.event.pull_request.number }}-${{ github.head_ref }}
+      -
+        # not used / triggered at the moment:
+        if: contains(github.ref, 'refs/heads/')
+        name: Build and push the feature branch image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/ci-php:${{ github.ref_name }}
