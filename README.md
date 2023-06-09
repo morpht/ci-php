@@ -1,6 +1,6 @@
 # ci-php
 
-Docker image based on the official dockerhub image php:8-alpine
+Docker image based on the official dockerhub image php:8.1.x-alpine3.17
 
 A few modifications:
 
