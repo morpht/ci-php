@@ -1,4 +1,4 @@
-FROM php:8-alpine
+FROM php:8.0.29-alpine3.17
 
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
