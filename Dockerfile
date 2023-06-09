@@ -12,8 +12,8 @@ RUN apk add --no-cache --update git \
         mysql-client \
         patch \
         rsync \
-        libpng libpng-dev \
-    && docker-php-ext-install gd pdo pdo_mysql \
+        libpng libpng-dev libzip-dev \
+    && docker-php-ext-install gd pdo pdo_mysql zip \
     && apk del libpng-dev \
     && rm -rf /var/cache/apk/* \
     && curl -L -o /usr/local/bin/composer https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
