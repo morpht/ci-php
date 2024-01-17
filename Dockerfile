@@ -1,4 +1,4 @@
-FROM php:8.1.27-alpine3.17
+FROM php:8.1.27-alpine3.18
 
 ARG RUNNER_UID=1001
 
