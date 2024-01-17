@@ -1,14 +1,12 @@
-FROM php:8.1.20-alpine3.17
-
-ARG RUNNER_UID=1001
+FROM php:8.1.27-alpine3.17
 
 ARG RUNNER_UID=1001
 
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 
-ENV COMPOSER_VERSION=2.6.4 \
-  COMPOSER_HASH_SHA256=5a39f3e2ce5ba391ee3fecb227faf21390f5b7ed5c56f14cab9e1c3048bcf8b8
+ENV COMPOSER_VERSION=2.6.6 \
+  COMPOSER_HASH_SHA256=72600201c73c7c4b218f1c0511b36d8537963e36aafa244757f52309f885b314
 
 RUN apk add --no-cache --update git \
         bash \
