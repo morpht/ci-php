@@ -1,7 +1,5 @@
 FROM php:8.2.14-alpine3.18
 
-ARG RUNNER_UID=1001
-
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 
@@ -22,6 +20,4 @@ RUN apk add --no-cache --update git \
     && echo "$COMPOSER_HASH_SHA256  /usr/local/bin/composer" | sha256sum -c \
     && chmod +x /usr/local/bin/composer
 
-RUN adduser -D -h /home/runner -u $RUNNER_UID runner
-
-USER runner
+ENV COMPOSER_ALLOW_SUPERUSER=1
