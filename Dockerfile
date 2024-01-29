@@ -1,7 +1,5 @@
 FROM php:8.2.14-alpine3.18
 
-ARG RUNNER_UID=1001
-
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 
@@ -41,6 +39,4 @@ RUN ARCH='x64'; \
     && node --version \
     && npm --version
 
-RUN adduser -D -h /home/runner -u $RUNNER_UID runner
-
-USER runner
+ENV COMPOSER_ALLOW_SUPERUSER=1
