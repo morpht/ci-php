@@ -24,4 +24,7 @@ RUN apk add --no-cache --update git \
 
 RUN adduser -D -h /home/runner -u $RUNNER_UID runner
 
-USER runner
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
