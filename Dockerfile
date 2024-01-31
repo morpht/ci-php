@@ -16,6 +16,7 @@ RUN apk add --no-cache --update git \
         patch \
         rsync \
         libpng libpng-dev libzip-dev \
+        xvfb \
     && docker-php-ext-install gd pdo pdo_mysql zip \
     && apk del libpng-dev \
     && rm -rf /var/cache/apk/* \
