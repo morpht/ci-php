@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 
 ENV COMPOSER_VERSION=2.6.6 \
     COMPOSER_HASH_SHA256=72600201c73c7c4b218f1c0511b36d8537963e36aafa244757f52309f885b314 \
-    PHP_MEMORY_LIMIT=512M
+    PHP_MEMORY_LIMIT=128M
 
 RUN apk add --no-cache --update git \
         bash \
