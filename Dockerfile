@@ -16,7 +16,7 @@ RUN apk add --no-cache --update git \
         patch \
         rsync \
         libpng libpng-dev libzip-dev \
-        xvfb \
+        libnotify libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb \
     && docker-php-ext-install gd pdo pdo_mysql zip \
     && apk del libpng-dev \
     && rm -rf /var/cache/apk/* \
