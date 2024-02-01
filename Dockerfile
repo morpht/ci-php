@@ -29,9 +29,9 @@ RUN apk add --no-cache --update git \
 # Add user 'runner' with specified UID
 RUN adduser -D -h /home/runner -u $RUNNER_UID runner
 
-# Install Node.js 18 and Cypress 13
+# Install Node.js and Cypress
 USER root
-RUN apk add --no-cache nodejs=18 npm=18 \
+RUN apk add --no-cache nodejs npm \
     && npm install -g cypress@13 \
     && chown -R runner:runner /home/runner
 
