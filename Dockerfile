@@ -16,6 +16,7 @@ RUN apk add --no-cache --update git \
         patch \
         rsync \
         libpng libpng-dev libzip-dev \
+        xvfb \
     && docker-php-ext-install gd pdo pdo_mysql zip \
     && apk del libpng-dev \
     && rm -rf /var/cache/apk/* \
@@ -23,6 +24,25 @@ RUN apk add --no-cache --update git \
     && echo "$COMPOSER_HASH_SHA256  /usr/local/bin/composer" | sha256sum -c \
     && chmod +x /usr/local/bin/composer \
     && echo 'memory_limit = ${PHP_MEMORY_LIMIT}' > /usr/local/etc/php/conf.d/memory-limit.ini
+
+# Remove warning about running as root in composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+### Install node
+
+ENV NODE_VERSION=18.19.0 \
+    CHECKSUM=10b7b23b6b867a25f060a433b83f5c3ecb3bcf7cdba1c0ce46443065a832fd41
+
+RUN ARCH='x64'; \
+    set -eu; \
+    apk add --no-cache \
+        libstdc++ \
+    && curl -fsSLO --compressed "https://unofficial-builds.nodejs.org/download/release/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" \
+    && echo "$CHECKSUM  node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" | sha256sum -c - \
+    && tar -xJf "node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
+    && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+    && node --version \
+    && npm --version
 
 RUN adduser -D -h /home/runner -u $RUNNER_UID runner
 
