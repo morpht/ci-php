@@ -1,3 +1,4 @@
+# Use a base image with PHP 8.2.14, Alpine 3.18
 FROM php:8.2.14-alpine3.18
 
 ARG RUNNER_UID=1001
@@ -9,6 +10,7 @@ ENV COMPOSER_VERSION=2.6.6 \
     COMPOSER_HASH_SHA256=72600201c73c7c4b218f1c0511b36d8537963e36aafa244757f52309f885b314 \
     PHP_MEMORY_LIMIT=128M
 
+# Install required packages and extensions
 RUN apk add --no-cache --update git \
         bash \
         openssh-client \
@@ -24,6 +26,13 @@ RUN apk add --no-cache --update git \
     && chmod +x /usr/local/bin/composer \
     && echo 'memory_limit = ${PHP_MEMORY_LIMIT}' > /usr/local/etc/php/conf.d/memory-limit.ini
 
+# Add user 'runner' with specified UID
 RUN adduser -D -h /home/runner -u $RUNNER_UID runner
+
+# Install Node.js 18 and Cypress 13
+USER root
+RUN apk add --no-cache nodejs=18 npm=18 \
+    && npm install -g cypress@13 \
+    && chown -R runner:runner /home/runner
 
 USER runner
