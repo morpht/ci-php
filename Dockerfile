@@ -5,8 +5,8 @@ ARG RUNNER_UID=1001
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 
-ENV COMPOSER_VERSION=2.6.6 \
-  COMPOSER_HASH_SHA256=72600201c73c7c4b218f1c0511b36d8537963e36aafa244757f52309f885b314
+ENV COMPOSER_VERSION=2.7.1 \
+  COMPOSER_HASH_SHA256=1ffd0be3f27e237b1ae47f9e8f29f96ac7f50a0bd9eef4f88cdbe94dd04bfff0
 
 RUN apk add --no-cache --update git \
         bash \
