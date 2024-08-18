@@ -8,6 +8,10 @@ LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
 ENV COMPOSER_VERSION=2.7.1 \
   COMPOSER_HASH_SHA256=1ffd0be3f27e237b1ae47f9e8f29f96ac7f50a0bd9eef4f88cdbe94dd04bfff0
 
+# Allow composer to run plugins during build.
+# https://github.com/composer/composer/issues/11839
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 RUN apk add --no-cache --update git \
         bash \
         openssh-client \
