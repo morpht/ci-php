@@ -20,8 +20,7 @@ RUN apk add --no-cache --update git \
     && rm -rf /var/cache/apk/* \
     && curl -L -o /usr/local/bin/composer https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
     && echo "$COMPOSER_HASH_SHA256  /usr/local/bin/composer" | sha256sum -c \
-    && chmod +x /usr/local/bin/composer \
-    && echo 'memory_limit = ${PHP_MEMORY_LIMIT}' > /usr/local/etc/php/conf.d/memory-limit.ini
+    && chmod +x /usr/local/bin/composer
 
 # RUN adduser -D -h /home/runner -u $RUNNER_UID runner
 
