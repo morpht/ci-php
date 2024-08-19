@@ -1,6 +1,6 @@
 FROM php:8.2.22-alpine3.19
 
-ARG RUNNER_UID=1001
+#ARG RUNNER_UID=1001
 
 LABEL maintainer="marji@morpht.com"
 LABEL org.opencontainers.image.source="https://github.com/morpht/ci-php"
@@ -23,6 +23,6 @@ RUN apk add --no-cache --update git \
     && chmod +x /usr/local/bin/composer \
     && echo 'memory_limit = ${PHP_MEMORY_LIMIT}' > /usr/local/etc/php/conf.d/memory-limit.ini
 
-RUN adduser -D -h /home/runner -u $RUNNER_UID runner
+#RUN adduser -D -h /home/runner -u $RUNNER_UID runner
 
-USER runner
+#USER runner
