@@ -1,10 +1,10 @@
 # ci-php
 
-Docker image based on the official dockerhub image php:8.2.x-alpine3.18
+Docker image based on the official dockerhub image php:8.2.x-alpine3.19
 
 A few modifications:
 
-- added composer v2.6.x
+- added composer v2.7.x
 - installed several packages, e.g. git and mysql-client
 - added php extensions - gd, pdo_mysql, zip
 
